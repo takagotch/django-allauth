@@ -17,6 +17,30 @@ ACCOUNT_FORMS = {
   'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
   'disconnect': 'allauth.socialaccount.forms.DisconnectForm'
 }
+
+
+from allauth.account.forms import LoginForm
+class MyCustomLoginForm(LoginForm):
+  def login(self, *args, **kwargs):
+    return super(MyCustomLoginForm, self).login(*args, **kwargs)
+
+ACCOUNT_FORMS = {'login': 'mysite.forms.MyCustomLoginForm'}
+
+from allauth.account.forms import SignupForm
+class MyCustomSignupForm(SignupForm):
+  def save(self, request):
+    user = super(MyCustomSignupForm, self).save(request)
+    return user
+
+ACCOUNT_FORMS = {'signup': 'mysite.forms.MyCustomSignupForm'}
+
+from allauth.account.forms import ChangePasswordForm
+class MyCustomChangePasswordForm(ChangePasswordForm):
+  def save(self):
+    super(MyCustomChangePasswordForm, self).save()
+
+ACCOUNT_FORMS = {'change_password': 'mysite.forms.MyCustomChangePasswordForm'}
+
 ```
 
 ```
