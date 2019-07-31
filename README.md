@@ -75,6 +75,35 @@ class MyCustomSocialDisconnectForm(DisconnectForm):
     super(MyCustomSocialDisconnectForm).save()
 
 SOCIALACCOUNT_FORMS = {'disconnect': 'mysite.forms.MyCustomSocialDisconnectForm'}
+
+from allauth.account.decorators import verified_email_required
+@verified_email_required
+def verified_users_only_view(request):
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+
+ACCOUNT_ADAPTER = 'project.users.adapter.MyAccountAdapter'
+from django.conf import settings
+from allauth.account.adapter import DefaultAccountAdapter
+class MyAccountAdapter(DefaultAccountAdapter):
+  def get_login_redirect_url(self, request):
+    path = "/accounts/{username}/"
+    return path.format(username=request.user.username)
+
+from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+admin.site.login = login_requreid(admin.site.login)
+
+
+class GoogleNoDefaultScopeProvider(GoogleProvider):
+  id = 'google_no_scope'
+  def get_default_scope(self):
+    return []
+provider_classes = [GoogleNoDefaltScopeProvider]
 ```
 
 ```
