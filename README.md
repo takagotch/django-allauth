@@ -7,6 +7,11 @@ from django.contrib.auth.validators import ASCIIUsernameValidator
 custom_username_validators = [ASCIIUsernameValidator()]
 ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
 
+
+from django.contrib.auth.validators import ASCIIUsernameValidator
+custom_username_validators = [ASCIIUsernameValidator()]
+ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+
 ACCOUNT_FORMS = {
   'login': 'allauth.account.forms.LoginForm',
   'signup': 'allauth.account.forms.SignupForm',
