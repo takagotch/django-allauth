@@ -90,6 +90,15 @@ SOCIALACCOUNT_FORMS = {'disconnect': 'mysite.forms.MyCustomSocialDisconnectForm'
 <a href="{% provider_login_url "openid" openid="https://www.google.com/accounts/o8/id" next="/success/url/" %}"></a>
 <a href="{% provider_login_url "twitter" %}">Twitter</a>
 
+{% providers_media_js %}
+
+{% get_social_accounts user as accounts %}
+
+{{accounts.twitter}} -- a list of connected Twitter accounts
+{{accounts.twitter.0}} -- the first Twitter account
+{% if accounts %} -- if there is at least one social account
+
+{% get_providers as socialaccount_providers %}
 ```
 
 ```
