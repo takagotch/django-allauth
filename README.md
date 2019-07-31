@@ -78,6 +78,18 @@ SOCIALACCOUNT_FORMS = {'disconnect': 'mysite.forms.MyCustomSocialDisconnectForm'
 ```
 
 ```
+{% load account %}
+{% user_display user %}
+
+{% load account %}
+{% user_display user as user_display %}
+{% blocktrans %}{{ user_display }} has logged in...{% endblocktrans %}
+
+
+{% load socialaccount %}
+<a href="{% provider_login_url "openid" openid="https://www.google.com/accounts/o8/id" next="/success/url/" %}"></a>
+<a href="{% provider_login_url "twitter" %}">Twitter</a>
+
 ```
 
 ```
